@@ -1,7 +1,6 @@
 package com.payment.demo.serviceImpl;
 
-import com.payment.demo.dto.CreatePaymentRequest;
-import com.payment.demo.dto.PaymentResponse;
+import com.payment.demo.dto.*;
 import com.payment.demo.entity.Payment;
 import com.payment.demo.repo.PaymentRepository;
 import com.payment.demo.service.PaymentServiceInterface;
@@ -18,7 +17,7 @@ public class PaymentServiceImpl implements PaymentServiceInterface {
         this.paymentRepository = paymentRepository;
     }
 
-    @Override
+    /*@Override
     public PaymentResponse createPayment(String idempotencyKey, CreatePaymentRequest paymentRequest) {
             Payment payment = Payment.builder().
                     idempotencyKey(idempotencyKey)
@@ -42,5 +41,42 @@ public class PaymentServiceImpl implements PaymentServiceInterface {
                 saved.getCreatedDate()
                 );
 
+    }*/
+
+    @Override
+    public PaymentResponse createPayment(String idempotencyKey, CreatePaymentRequest paymentRequest) {
+        return null;
+    }
+
+    @Override
+    public PaymentResponse createDeposit(String idempotencyKey, CreateDepositRequest request) {
+
+        Payment payment = Payment.builder().
+                idempotencyKey(idempotencyKey)
+                .amount(request.getAmount())
+                .currency(request.getCurrency())
+                .status("Success")
+                .createdDate(LocalDateTime.now())
+                .build();
+
+
+
+
+        Payment saved = paymentRepository.save(payment);
+        return new PaymentResponse(
+                saved.getIdempotencyKey(),
+                saved.getAmount(),
+                saved.getCurrency(),
+                saved.getStatus(),
+//                saved.getFromaccount(),
+//                saved.getToaccount(),
+                saved.getCreatedDate()
+        );
+    }
+
+    @Override
+    public PaymentWithdrawalResponse createWithdrawal(String idempotencyKey, CreateWithdrawalRequest request) {
+
+        return null;
     }
 }

@@ -15,7 +15,7 @@ public class PaymentResponse {
     private BigDecimal amount;
     private String currency;
     private String status;
-    private String fromAmount;
-    private String toAccount;
+//    private String fromAmount;
+//    private String toAccount;
     private LocalDateTime createdDate;
 }

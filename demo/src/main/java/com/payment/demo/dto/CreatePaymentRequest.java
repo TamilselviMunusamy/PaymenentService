@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreatePaymentRequest {
 
-    BigDecimal amount;
-    String currency;
-    String fromAccount;
-    String toAccount;
+    private BigDecimal amount;
+    private String currency;
+    private String fromAccount;
+    private  String toAccount;
 
 }

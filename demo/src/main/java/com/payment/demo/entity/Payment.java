@@ -27,10 +27,10 @@ public class Payment {
     private BigDecimal amount;
     @Column(nullable = false)
     private String currency;
-    @Column(nullable = false)
-    private String fromaccount;
-    @Column(nullable = false)
-    private String  toaccount;
+//    @Column(nullable = false) removing as account will be nullable if direct transaction
+//    private String fromaccount;
+//    @Column(nullable = false) removing as account will be nullable if direct transaction
+//    private String  toaccount;
 
     @Column(nullable = false)
     private  String status;

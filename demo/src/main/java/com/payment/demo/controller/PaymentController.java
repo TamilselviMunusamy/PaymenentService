@@ -1,7 +1,6 @@
 package com.payment.demo.controller;
 
-import com.payment.demo.dto.CreatePaymentRequest;
-import com.payment.demo.dto.PaymentResponse;
+import com.payment.demo.dto.*;
 import com.payment.demo.service.PaymentServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,5 +23,16 @@ public class PaymentController {
         )
         {
                 return paymentServiceInterface.createPayment(idempotencyKey,request);
+        }
+
+        @PostMapping("/deposit")
+        @ResponseStatus(HttpStatus.CREATED)
+        public PaymentResponse depositCreation(@RequestHeader ("Idempotency-Key") String idempotencyKey, @Valid @RequestBody CreateDepositRequest request){
+                return paymentServiceInterface.createDeposit(idempotencyKey,request);
+        }
+        @PostMapping("/withdrawal")
+        @ResponseStatus(HttpStatus.CREATED)
+        public PaymentWithdrawalResponse withdrawalCreation(@RequestHeader("Idempotency-Key") String idempotencyKey,@Valid @RequestBody CreateWithdrawalRequest request){
+                return paymentServiceInterface.createWithdrawal(idempotencyKey,request);
         }
 }
